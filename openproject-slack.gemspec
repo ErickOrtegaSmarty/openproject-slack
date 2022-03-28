@@ -8,9 +8,9 @@ Gem::Specification.new do |s|
   s.version     = OpenProject::Slack::VERSION
   s.authors     = "OpenProject GmbH"
   s.email       = "info@openproject.org"
-  s.summary     = 'OpenProject Slack'
-  s.description = "Slack integration"
-  s.license     = "FIXME" # e.g. "MIT" or "GPLv3"
+  s.summary     = 'Informacion TS'
+  s.description = ""
+  s.license     = "MIT" # e.g. "MIT" or "GPLv3"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + %w(CHANGELOG.md README.md)
 
