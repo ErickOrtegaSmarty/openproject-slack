@@ -6,10 +6,10 @@ require 'open_project/slack/version'
 Gem::Specification.new do |s|
   s.name        = "openproject-slack"
   s.version     = OpenProject::Slack::VERSION
-  s.authors     = "OpenProject GmbH"
+  s.authors     = "Smartydreams"
   s.email       = "info@openproject.org"
   s.summary     = 'Informacion TS'
-  s.description = ""
+  s.description = "Modulo para el envio de Timesheets"
   s.license     = "MIT" # e.g. "MIT" or "GPLv3"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + %w(CHANGELOG.md README.md)
