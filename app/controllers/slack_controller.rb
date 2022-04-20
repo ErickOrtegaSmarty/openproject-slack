@@ -4,13 +4,25 @@ require 'json'
 
 class SlackController < ApplicationController
   def index
-    uri = URI('http://3.130.0.185:8080/pmoDev/api/v3/queries')
+    id_compare = "#{request.params[:project_id]}"
+    uri = URI("#{root_url}/api/v3/projects")
     req = Net::HTTP::Get.new(uri)
-    req.basic_auth 'apikey', '720612c4e93bafff08a909592ae3e0fa793a32633fc078890b425d1f68608d02'
+    req['X-Requested-With'] = "XMLHttpRequest"
     res = Net::HTTP.start(uri.hostname, uri.port) { |http|
       http.request(req)
     }
     @body = JSON.parse(res.body)
+    @project_id = @body["_embedded"]["elements"].find { |h| h["identifier"] == id_compare }["_links"]["self"]["href"]
+
+    uri = URI("#{root_url}/api/v3/queries")
+    req = Net::HTTP::Get.new(uri)
+    req['X-Requested-With'] = "XMLHttpRequest"
+    res = Net::HTTP.start(uri.hostname, uri.port) { |http|
+      http.request(req)
+    }
+    @body = JSON.parse(res.body)
+    @query_version = @body["_embedded"]["elements"].find { |h| h["_links"]["self"]["title"] == "Version - Sprint" && h["_links"]["project"]["href"] == @project_id }
+    @link = @query_version["_links"]["results"]["href"]
     render layout: true
   end
 end

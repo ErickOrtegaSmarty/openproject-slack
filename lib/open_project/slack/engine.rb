@@ -15,18 +15,18 @@ module OpenProject::Slack
     ) do
       menu :project_menu,
            :slack,
-           { controller: '/slack', action: 'index'},
+           { controller: '/slack', action: 'index' },
            caption: :label_slack_plugin,
            icon: 'icon2 icon-slack'
-    
-           project_module :slack do |_map|
-            permission :view_slack, slack: %i[index show download]
-           end
-           Redmine::Search.register :slack
+
+      project_module :slack do |_map|
+        permission :view_slack, slack: %i[index show download]
       end
+      Redmine::Search.register :slack
+    end
 
     add_api_path :slack do
       "#{root}/slack"
     end
-    end
   end
+end
